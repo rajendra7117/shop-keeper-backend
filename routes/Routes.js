@@ -1,21 +1,36 @@
 const express = require("express");
 const router = express.Router();
 
-const shopControllers = require('../controllers/shop-controllers')
+const validators = require("../Validators/RouteBodyValidators");
 
-const productControllers = require('../controllers/product-controllers')
+const shopControllers = require("../controllers/shop-controllers");
 
-router.post("/register/", shopControllers.registerShop);
+const productControllers = require("../controllers/product-controllers");
+// console.log(validators.registerValidator);
 
-router.post("/login/", shopControllers.loggInToShop);
+router.post(
+  "/register/",
+  validators.registerValidator,
+  shopControllers.registerShop
+);
+
+router.post("/login/", validators.loginValidator, shopControllers.loggInToShop);
 
 router.get("/products/", productControllers.getProducts);
 
-router.get("/product/:id", productControllers.getProductById)
+router.get("/product/:id", productControllers.getProductById);
 
-router.post("/add-product/", productControllers.addProduct);
+router.post(
+  "/add-product/",
+  validators.productValidator,
+  productControllers.addProduct
+);
 
-router.patch("/edit-product/:id", productControllers.editProduct);
+router.patch(
+  "/edit-product/:id",
+  validators.productValidator,
+  productControllers.editProduct
+);
 
 router.delete("/delete-product/:id", productControllers.deleteProduct);
 
