@@ -11,4 +11,4 @@ const shopSchema = new Schema({
     password: {type: String, required: true}
 })
 
-module.exports = mongoose.model('ShopDetail', shopSchema)
+module.exports = mongoose.model('Shop', shopSchema)
